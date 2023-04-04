@@ -1,6 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+int check_num(char figure[], int* p)
+{
+    int k = *p;
+
+    char str2[13] = "-.0123456789";
+
+    while (figure[k] == ' ') {
+        k++;
+    }
+
+    if (figure[k] == '0') {
+        if (figure[k + 1] != '.' && strchr(str2, figure[k + 1]) != NULL) {
+            printf("Ошбика в позиции %d, введите '.' \n", k);
+            return 0;
+        }
+    }
+
+    if (strchr(str2, figure[k]) == NULL) {
+        printf("Ошбика в позиции %d, введен неправильный символ\n", k);
+        return 0;
+    }
+
+    while (strchr(str2, figure[k]) != NULL) {
+        k++;
+    }
+
+    if (figure[k] == ',' || figure[k] == ')') {
+        printf("Ошбика в позиции %d, введите число\n", k);
+        return 0;
+    }
+
+    if (figure[k] != ' ') {
+        printf("Ошбика в позиции %d, введите пробел\n", k);
+        return 0;
+    }
+
+    while (figure[k] == ' ') {
+        k++;
+    }
+
+    if (figure[k] == '0') {
+        if (figure[k + 1] != '.' && strchr(str2, figure[k + 1]) != NULL) {
+            printf("Ошбика в позиции %d, введите '.'\n", k);
+            return 0;
+        }
+    }
+
+    if (strchr(str2, figure[k]) == NULL) {
+        printf("Ошбика в позиции %d, введен неправильный символ\n", k);
+        return 0;
+    }
+
+    while (strchr(str2, figure[k]) != NULL) {
+        k++;
+    }
+	k++;
+    while (figure[k] == ' ') {
+        k++;
+    }
+	while (strchr(str2, figure[k]) != NULL) {
+        k++;
+    }
+
+	if (figure[k] != ')') {
+        printf("Ошбика в позиции %d, введите ')'\n", k);
+		return 0;
+    }
+
+    k++;
+    *p = k;
+    return 1;
+}
 
 struct Point {
 	float x;
